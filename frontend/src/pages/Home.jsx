@@ -60,11 +60,18 @@ const modules = [
   }
 ];
 
+/**
+ * Home Component
+ * The main dashboard for VoteIQ, featuring hero section, module navigation, 
+ * and historical context sections.
+ * 
+ * @returns {JSX.Element} The rendered Home page
+ */
 const Home = () => {
   return (
     <div className="pb-12">
       {/* Tricolor Border at Top */}
-      <div className="h-0.5 w-full flex opacity-60">
+      <div className="h-0.5 w-full flex opacity-60" aria-hidden="true">
         <div className="h-full w-1/3 bg-saffron"></div>
         <div className="h-full w-1/3 bg-white"></div>
         <div className="h-full w-1/3 bg-india-green"></div>
@@ -87,10 +94,18 @@ const Home = () => {
               Fun, interactive, and easy to follow.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/chat" className="btn-primary text-lg px-8 py-3">
+              <Link 
+                to="/chat" 
+                className="btn-primary text-lg px-8 py-3"
+                aria-label="Start learning with AI assistant"
+              >
                 Start Learning
               </Link>
-              <Link to="/quiz" className="btn-outline text-lg px-8 py-3">
+              <Link 
+                to="/quiz" 
+                className="btn-outline text-lg px-8 py-3"
+                aria-label="Test your knowledge with a quiz"
+              >
                 Take a Quiz
               </Link>
             </div>
@@ -102,7 +117,7 @@ const Home = () => {
       <div className="max-w-7xl mx-auto px-4 -mt-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-2xl shadow-xl flex items-center gap-4">
-            <div className="p-3 bg-saffron/20 rounded-xl text-saffron">
+            <div className="p-3 bg-saffron/20 rounded-xl text-saffron" aria-hidden="true">
               <ShieldCheck className="h-8 w-8" />
             </div>
             <div>
@@ -111,7 +126,7 @@ const Home = () => {
             </div>
           </div>
           <div className="bg-white p-6 rounded-2xl shadow-xl flex items-center gap-4">
-            <div className="p-3 bg-india-green/20 rounded-xl text-india-green">
+            <div className="p-3 bg-india-green/20 rounded-xl text-india-green" aria-hidden="true">
               <Users className="h-8 w-8" />
             </div>
             <div>
@@ -120,7 +135,7 @@ const Home = () => {
             </div>
           </div>
           <div className="bg-white p-6 rounded-2xl shadow-xl flex items-center gap-4">
-            <div className="p-3 bg-navy-blue/20 rounded-xl text-navy-blue">
+            <div className="p-3 bg-navy-blue/20 rounded-xl text-navy-blue" aria-hidden="true">
               <Vote className="h-8 w-8" />
             </div>
             <div>
@@ -132,11 +147,11 @@ const Home = () => {
       </div>
 
       {/* Modules Grid */}
-      <section className="max-w-7xl mx-auto px-4 mt-20">
-        <h2 className="text-3xl font-bold text-center mb-12">Explore Modules</h2>
+      <section className="max-w-7xl mx-auto px-4 mt-20" aria-labelledby="modules-title">
+        <h2 id="modules-title" className="text-3xl font-bold text-center mb-12">Explore Modules</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {modules.map((module, index) => (
-            <motion.div
+            <motion.article
               key={index}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -145,10 +160,11 @@ const Home = () => {
               <Link 
                 to={module.link}
                 className="group block bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 h-full relative overflow-hidden"
+                aria-label={`Go to ${module.title} module`}
               >
                 <div className={`absolute top-0 right-0 w-24 h-24 ${module.color} opacity-5 -mr-8 -mt-8 rounded-full transition-all group-hover:scale-150 duration-500`}></div>
                 
-                <div className={`${module.color} text-white p-4 rounded-2xl inline-block mb-6 shadow-lg`}>
+                <div className={`${module.color} text-white p-4 rounded-2xl inline-block mb-6 shadow-lg`} aria-hidden="true">
                   <module.icon className="h-8 w-8" />
                 </div>
                 
@@ -160,10 +176,10 @@ const Home = () => {
                 </p>
                 
                 <div className="flex items-center text-navy-blue font-semibold group-hover:gap-2 transition-all">
-                  Get Started <ChevronRight className="h-5 w-5" />
+                  Get Started <ChevronRight className="h-5 w-5" aria-hidden="true" />
                 </div>
               </Link>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </section>
@@ -178,11 +194,11 @@ const Home = () => {
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-4 text-india-green font-bold">
-                <ShieldCheck className="h-6 w-6" />
+                <ShieldCheck className="h-6 w-6" aria-hidden="true" />
                 <span>100% Secure & Transparent Process</span>
               </div>
               <div className="flex items-center gap-4 text-saffron font-bold">
-                <Vote className="h-6 w-6" />
+                <Vote className="h-6 w-6" aria-hidden="true" />
                 <span>Your Voice, Your Future</span>
               </div>
             </div>
@@ -190,8 +206,9 @@ const Home = () => {
           <div className="lg:w-1/2 relative h-[400px] lg:h-auto">
             <img 
               src={votingImg} 
-              alt="People Voting" 
+              alt="Indian citizens waiting in a queue to cast their votes at a polling station" 
               className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent lg:block hidden"></div>
           </div>
@@ -199,10 +216,10 @@ const Home = () => {
       </section>
 
       {/* Freedom Fighters Section */}
-      <section className="max-w-7xl mx-auto px-4 mt-24 mb-12">
+      <section className="max-w-7xl mx-auto px-4 mt-24 mb-12" aria-labelledby="guardians-title">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-navy-blue mb-4">Salute to the Guardians of Democracy</h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-saffron via-gray-200 to-india-green mx-auto rounded-full mb-8"></div>
+          <h2 id="guardians-title" className="text-4xl font-bold text-navy-blue mb-4">Salute to the Guardians of Democracy</h2>
+          <div className="w-24 h-1.5 bg-gradient-to-r from-saffron via-gray-200 to-india-green mx-auto rounded-full mb-8" aria-hidden="true"></div>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Honoring the visionaries who fought for our right to choose our leaders. 
             Their sacrifice made our democracy possible.
@@ -215,24 +232,25 @@ const Home = () => {
             { name: "Shaheed Bhagat Singh", image: bhagatImg, quote: "They may kill me, but they cannot kill my ideas." },
             { name: "Netaji Subhash Bose", image: boseImg, quote: "Freedom is not given, it is taken." }
           ].map((hero, i) => (
-            <motion.div
+            <motion.article
               key={i}
               whileHover={{ y: -10 }}
               className="relative group overflow-hidden rounded-[2.5rem] shadow-2xl aspect-[3/4]"
             >
               <img 
                 src={hero.image} 
-                alt={hero.name} 
+                alt={`Portrait of ${hero.name}`} 
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-blue via-transparent to-transparent opacity-90 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-blue via-transparent to-transparent opacity-90 group-hover:opacity-100 transition-opacity" aria-hidden="true"></div>
               <div className="absolute bottom-0 left-0 p-8 text-white">
                 <h3 className="text-2xl font-bold mb-2">{hero.name}</h3>
                 <p className="text-sm italic opacity-80 leading-relaxed border-l-2 border-saffron pl-4">
                   "{hero.quote}"
                 </p>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </section>
