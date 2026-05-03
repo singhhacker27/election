@@ -27,12 +27,12 @@ jobs:
       - name: Build and Push Backend
         run: |
           gcloud builds submit ./backend \
-            --tag gcr.io/${{ env.PROJECT_ID }}/election-backend
+            --tag gcr.io/${{ env.PROJECT_ID }}/electionvote-api
 
       - name: Deploy Backend to Cloud Run
         run: |
-          gcloud run deploy election-backend \
-            --image gcr.io/${{ env.PROJECT_ID }}/election-backend \
+          gcloud run deploy electionvote-api \
+            --image gcr.io/${{ env.PROJECT_ID }}/electionvote-api \
             --platform managed \
             --region ${{ env.REGION }} \
             --allow-unauthenticated \
@@ -56,12 +56,12 @@ jobs:
       - name: Build and Push Frontend
         run: |
           gcloud builds submit ./frontend \
-            --tag gcr.io/${{ env.PROJECT_ID }}/election-frontend
+            --tag gcr.io/${{ env.PROJECT_ID }}/electionvote
 
       - name: Deploy Frontend to Cloud Run
         run: |
-          gcloud run deploy election-frontend \
-            --image gcr.io/${{ env.PROJECT_ID }}/election-frontend \
+          gcloud run deploy electionvote \
+            --image gcr.io/${{ env.PROJECT_ID }}/electionvote \
             --platform managed \
             --region ${{ env.REGION }} \
             --allow-unauthenticated
